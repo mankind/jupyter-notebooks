@@ -1,0 +1,105 @@
+https://towardsdatascience.com/underrated-machine-learning-algorithms-apriori-1b1d7a8b7bc
+
+       Stats for Hackers
+https://www.youtube.com/watch?v=e0RcKB1pR-Q
+Speaker: Jake Vanderplas
+ - http://vanderplas.com/
+ - https://github.com/jakevdp
+
+28 mins for summary of all 4 methods
+
+## null hypothesis & p-value
+
+### Asking the right question about data
+                 intro to resampling methods 
+   Sampling methods allow you to use intuitive computational approaches in place of often non-intuitive 
+   statistical rules. 
+   If you can write a loop you can do statistical analysis               
+Four recipes for Hacking Statistics:
+1. Direct Simulation
+  Used when you have some apriori model of the data generation process, eg you
+  know a coin toss will land 50% of the time, you can simulate 
+  that.
+2. Shuffling
+   When you dont have apriori model or knowledge
+   Use when you want to know if one group is really better.
+   You administer some kind of test to get back scores.
+   You get the mean of the scores for each group, then get
+   eg group A with mean of 73.5, and group B with mean of 66.9
+   and a difference of of 6.6
+   is this difference statistically significant?
+   You can go the classical way by using  welch's T-test
+   Idea 1
+   Simulate the distribution by shuffling the labels
+   reapeatedly & computing the desired statistics.
+   Motivation
+   If the labels really dont matter then switchng them should 
+  not affect result.
+   steps
+  1. shuffle the label, 2. Rearrange, 3. Compute means
+  Notes on shuffling
+  - . Works when the null hypothesis assumes the two groups are equivalent
+  -. Like all methods, it will only work if your samples are representative
+   - always be careful about selection bias
+   - Need care for non-indepent trials. Good discussion in Simon's
+     Resampling: The new statistics
+
+3. Bootstrapping
+   Idea
+   Simulate the distribution of drawing samples with replacement
+   Motivation:
+   The data estimatesits own distribution. - We draw random samples from this 
+   distribution.
+   Notes
+   - Bootstrapping often does not work well with rank-based statistics
+     eg maimum value
+   - Works poorly with very few samples (N > 20 is a good rule of the thumb)
+   - Always be vareful about sampling bias & non-idependent variables.
+
+4. Cross Validation
+In cross validation, we take 
+ - the data and split it randomly, - find the best models for each subset
+ - the flipflop the data by comparing models across subset.
+ - compute the root mean square(RMS) error for each model
+ - repat for as long as you have patience.
+ - Compare cross-validated RMS FOR MODELS. ASK IS THE MODEL influence more 
+   by the nois in the data than by the data itself.
+A way to determine a way for how well a model is fitting data when you dont
+have some apriori descrition of the data
+So is used to choose which model is a better fit
+Can we judge by root mean square error
+Root mean square error does not tell the whole story.
+  classic method to use if you wantto avoid doing cross vaidation
+ - difference in mean squared error follows chi-squaed distribution
+ - can estimates degrees of freedom easily because the models are nested
+Plug in our numbers
+  
+  Nots on Cross Validation
+  - This was a '2 -fold' cross validation because we split the data into 2. 
+    Cross Validation(CV) schemes exist and may perform better for your data(eg see scikit-learn docs)
+  - Cross validation is the go to method for model evaluation in machine learning
+   as statistics of the models are often not known in the classical sense.
+  - Again: caveats about selection bias, & indepence in data
+
+
+* is cross validation needed only when tere is risk of overfitting
+
+      Things I did not have time for
+ - Bayesian methods: very intuitive and powerful approaches to more sophisticated modeling
+    see baysian methods for hackers by Cam Davidson
+ - Selection bias, if you get data selection wrong, you will have a bad time
+    see chris fonnesbeck scipy 2015 talk, statistical thinking for datascience
+ - Detailed consideration on use of sampling,shuffling and bootstrapping
+     recommends 
+       statistics is easy by shasha and wilson
+       resampling the new statistics by julian simon
+ 
+   sampling vs shuffling
+            
+Stop at 33 mins
+
+speakersdeck.com/jakevdp/statistics-for-hackers/
+
+Statistical Thinking for Data Science | SciPy 2015 | Chris Fonnesbeck
+  6 mins
+  
